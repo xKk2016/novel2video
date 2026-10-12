@@ -1,0 +1,25 @@
+# 统一换行符处理，避免 Windows / Linux 之间反复产生假 diff
+* text=auto
+
+# Windows 批处理必须是 CRLF，否则 cmd.exe 解析异常
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell / Python 用 LF
+*.sh  text eol=lf
+*.py  text eol=lf
+
+# 二进制：不做行尾转换，也不参与文本 diff
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.mp4  binary
+*.m4a  binary
+*.mp3  binary
+*.wav  binary
+*.safetensors binary
+
+# JSON / 报告：正常按文本 diff
+*.json text
+*.md   text

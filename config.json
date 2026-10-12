@@ -1,0 +1,238 @@
+{
+  "comfyui_url": "http://127.0.0.1:8188",
+  "comfyui_launch_bat": "C:/ComfyUI/v0.30.0/ComfyUI_windows_portable_nvidia/ComfyUI_windows_portable/run_nvidia_gpu.bat",
+  "comment_comfyui_auto_start": "[2026-10-06 老板规矩] ComfyUI 一律由老板手工启动，脚本与 AI 都不得后台拉起进程。false = 只探测连通性，不通就报错退出（不自行 launch）。要恢复自动拉起改回 true。",
+  "comfyui_auto_start": false,
+  "llm": {
+    "provider": "deepseek",
+    "api_key": "env://DEEPSEEK_API_KEY",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat"
+  },
+  "video": {
+    "mode": "chain",
+    "comment_mode": "chain=场首R2V锁人+场内I2V截帧接力(当前主线) / fl2va=首尾帧夹逼(旧法) / t2v=纯文生视频 / r2v=全程参考图",
+    "workflow_api": "templates/h3_t2v_turbo4_api.json",
+    "workflow_api_r2v": "templates/h3_r2v_turbo4_api.json",
+    "workflow_api_i2v": "templates/h3_i2v_turbo4_api.json",
+    "workflow_api_fl2va": "templates/h3_fl2va_turbo4_api.json",
+    "i2v_prompt_input": [
+      "6",
+      "prompt"
+    ],
+    "i2v_first_frame_input": [
+      "20",
+      "image"
+    ],
+    "fl2va_prompt_input": [
+      "6",
+      "prompt"
+    ],
+    "first_frame_input": [
+      "20",
+      "image"
+    ],
+    "last_frame_input": [
+      "21",
+      "image"
+    ],
+    "prompt_input": [
+      "6",
+      "prompt"
+    ],
+    "r2v_prompt_input": [
+      "5",
+      "prompt"
+    ],
+    "ref_images_input": [
+      "5",
+      "ref_images"
+    ],
+    "shot_timeout_sec": 5400,
+    "comment_shot_timeout": "单镜生成超时（秒）。⚠️ 2026-10-06 由代码默认的 2400（40 分钟）提到 5400（90 分钟）：H3 耗时随帧数超线性增长，本片最长镜 23 = 260 帧（10.83s），按 n^2 模型估算约 51 分钟 > 老超时线 → 会被误判超时并触发失败重试，单镜白烧 1.5~2 小时。放宽只是不误杀，不影响画面质量。",
+    "comment_ref_images": "[assets/02_design · 2026-10-06 分层整理] 定妆资产（先定妆再开拍）。characters/<角色>/{front,side,face,back}.png —— ①正面全身 ②侧面全身 ③面部特写 ④背面全身，顺序即 prompt 里 <Picture N> 的编号，由本项与 ref_images_by_scene 决定。⚠️ 必须含背面图（back.png）—— 曾只挂 front/side/face，导致所有背影镜头零参考，模型凭空编背影。scenes/<空间>.png —— 场景定妆图，由 scene_anchor.anchors.*.image 引用。props/ —— 道具定妆图（预留，行业惯例要求「场景图→道具图→人物定妆图」顺序挂载）。运行时不读 assets/_archive/（废弃代次：gen3/gen4/gen4_clean 与原始出图）。",
+    "ref_images": [
+      "assets/02_design/characters/fangyuan_youth/front.png",
+      "assets/02_design/characters/fangyuan_youth/side.png",
+      "assets/02_design/characters/fangyuan_youth/face.png",
+      "assets/02_design/characters/fangyuan_youth/back.png"
+    ],
+    "comment_ref_images_by_scene": "按场次覆盖三视图参考（键=scene_no）。场1=前世自爆用成年版；场2/场4 重生后用少年版。未命中的场次回退到 ref_images。",
+    "ref_images_by_scene": {
+      "1": [
+        "assets/02_design/characters/fangyuan_adult/front.png",
+        "assets/02_design/characters/fangyuan_adult/side.png",
+        "assets/02_design/characters/fangyuan_adult/face.png",
+        "assets/02_design/characters/fangyuan_adult/back.png"
+      ],
+      "2": [
+        "assets/02_design/characters/fangyuan_youth/front.png",
+        "assets/02_design/characters/fangyuan_youth/side.png",
+        "assets/02_design/characters/fangyuan_youth/face.png",
+        "assets/02_design/characters/fangyuan_youth/back.png"
+      ],
+      "4": [
+        "assets/02_design/characters/fangyuan_youth/front.png",
+        "assets/02_design/characters/fangyuan_youth/side.png",
+        "assets/02_design/characters/fangyuan_youth/face.png",
+        "assets/02_design/characters/fangyuan_youth/back.png"
+      ]
+    },
+    "comment_protagonist_keywords": "[2026-10-06] 仅在分镜**缺少 protagonist 字段**时才作回退匹配。本片 57/57 镜都有显式 protagonist 字段，故本项实际不参与判定；但仍同步更新，免得日后回退到旧形象。需同时覆盖两个年龄版：场1 银白发+碧绿袍，场2/4 黑发+黑袍。",
+    "protagonist_keywords": [
+      "silver-white hair",
+      "black hair",
+      "jade-green robe",
+      "black robe"
+    ],
+    "style_prefix": "Clean sharp high-clarity 3D CG render, pristine photorealistic detail, high-end real-time game engine quality, Unreal Engine 5 Nanite high-polygon geometry with dense fine surface detail, Lumen global illumination, ray-traced indirect light, physically based materials with realistic skin and fabric, bright even diffuse lighting, neutral balanced natural color with moderate saturation, deep focus, crisp razor-sharp clarity from foreground to background, clean pristine render, ultra-detailed 8K",
+    "comment_style_negatives": "反风格短语（留作通用开关）。⚠️ 2026-10-06：画风路线由 2D 国漫改为 3D 番剧后，本项已置 false —— 原内容 no 3D rendering / no CGI 与新路线完全相反，留着会主动把画面往 2D 拽。H3 用 BasicGuider + cfg=1，没有 negative prompt 通道，这类词只能以正向描述存在，且无 CFG 模型对否定词理解不可靠、有被反向强化的风险，故默认关闭。",
+    "style_negatives": "",
+    "style_negatives_enabled": false,
+    "comment_style_markers": "风格标记：①判断文本是否已带风格串（幂等）；②识别并剥除分镜自带的开头短风格句（否则短句会把完整风格串挤掉）。含 donghua/cel-shaded，可同时命中 2D 旧短句与 3D 新串的旧写法。",
+    "style_markers": [
+      "donghua",
+      "cel-shaded",
+      "cel shaded",
+      "anime style",
+      "manhua",
+      "flat coloring"
+    ],
+    "comment_costume": "角色服装串（可配置）。人物每集/每场形象会变，故不写进分镜，改这里统一注入。优先级：分镜单镜 costume 字段 > by_scene[场次] > by_episode[集] > default。apply_to: protagonist=仅对有主角关键词的镜注入（默认）/ all=所有镜。enabled=false 可整体关闭。",
+    "episode": "1",
+    "costume": {
+      "enabled": true,
+      "default": "wearing an entirely black long cross-collar robe over a white inner lining, a plain black cloth belt tied at the waist",
+      "by_episode": {},
+      "by_scene": {
+        "1": "wearing a tattered dark jade-green long cross-collar robe, the silk dulled and frayed with its hem torn into hanging strips, over a plain off-white inner lining, a dark green cloth belt knotted at the waist"
+      },
+      "apply_to": "protagonist"
+    },
+    "comment_character": "角色外貌串（可配置）。实测仅靠三视图参考，人物细节（脸型/眼型/神情/发型）容易跑偏，故运行期把外貌钉死补进 prompt。优先级同上：分镜单镜 appearance 字段 > by_scene[场次] > by_episode[集] > default。apply_to: protagonist=仅对有主角关键词的镜注入（默认）/ all=所有镜。 ⚠️ 2026-10-06 修正：原串里的 completely expressionless ... no smile 属于「表情禁令」，会与分镜自带的情绪动作直接对撞（镜13 smiles quietly、镜38 a small private smile）——实测 H3 前段听外貌串冷脸、后段才做出分镜要求的表情，过程不可控。现改为只描述「静态长相」（a cold composed resting face with naturally flat-set lips, a calm indifferent gaze），表情一律交给分镜。",
+    "character": {
+      "enabled": true,
+      "default": "the character is a slender young man with a lean narrow face and a soft jawline, sharp narrow half-lidded eyes, straight thin eyebrows, a cold composed resting face with naturally flat-set lips, a calm indifferent gaze, long straight black hair worn completely loose with no topknot no bun no hair band and no hairpin, pale skin",
+      "by_scene": {
+        "1": "the character is a handsome young man in his early twenties with the same lean narrow face and facial bone structure as the younger version of himself, a softly tapering jawline, subtly defined cheekbones, a straight slender nose, softly shaped full lips, narrow slender half-lidded eyes with inner double eyelids, thin gently curved dark eyebrows, a cold composed resting face with naturally flat-set lips, a calm indifferent gaze, smooth clear pale skin with a faint natural blush and no wrinkles, long straight silver-white hair worn completely loose and falling well past the shoulders with no topknot no bun no hair band and no hairpin",
+        "2": "the character is a slender teenage boy about sixteen years old with a lean narrow face and a soft jawline, a slimmer and younger-looking face, sharp narrow half-lidded eyes, straight thin eyebrows, a cold composed resting face with naturally flat-set lips, a calm indifferent gaze, long straight black hair worn completely loose with no topknot no bun no hair band and no hairpin, pale skin",
+        "4": "the character is a slender teenage boy about sixteen years old with a lean narrow face and a soft jawline, a slimmer and younger-looking face, sharp narrow half-lidded eyes, straight thin eyebrows, a cold composed resting face with naturally flat-set lips, a calm indifferent gaze, long straight black hair worn completely loose with no topknot no bun no hair band and no hairpin, pale skin"
+      },
+      "by_episode": {},
+      "apply_to": "protagonist"
+    },
+    "comment_scene_anchor": "场景锚（空间锚）：同一空间（祠堂/走廊/山寨夜/山巅…）内的镜头必须共用同一套环境基准，否则无主角的空镜各画各的、同场空间感漂移。锚按「空间」划分而非按场次（一场可能含多个空间，如场2=山寨夜景+祠堂+走廊）。两层生效：①文字锚——把 anchor.prompt 注入该镜最终 prompt（所有模式都生效）；②图锚——mode=i2v 时，无主角镜改走 I2V（首帧=锚图，背景铁定同源），有主角镜把锚图追加进 R2V 参考图列表（人物锁三视图 + 环境锁锚图）。优先级：分镜单镜 anchor 字段 > by_scene[场次] > 无锚（原行为）。mode: i2v=图锚+I2V（默认）/ prompt=仅文字锚 / off=关闭。",
+    "scene_anchor": {
+      "enabled": true,
+      "mode": "i2v",
+      "anchors": {
+        "peak_dusk": {
+          "prompt": "on the flat cracked stone plateau of a bare grey mountain summit at dusk, a soft muted dusk sky with a low red sun near the horizon and thin soft clouds, jagged grey stone spires and barren rock underfoot, distant mountain ridges receding, bright even light, a clean cold mountain wind",
+          "image": "assets/02_design/scenes/peak_dusk.png"
+        },
+        "peak_dusk_siege": {
+          "prompt": "on the flat cracked stone plateau of a bare grey mountain summit at dusk, a lone man seen from behind standing in the middle distance in a tattered dark jade-green robe with long loose silver-white hair falling down his back, and beyond him on the far side of the open rock a loose scattered rank of dozens of distant hostile cultivators drawn up along one shared front, no two of them dressed alike in ancient martial robes of many different colours and cuts, every one of them turned the same way facing him with weapons of every kind levelled the same way toward him and not one weapon turned on a companion, broad clear empty ground between him and the nearest of them, a soft muted dusk sky with a low red sun, distant mountain ridges receding",
+          "image": "assets/02_design/scenes/peak_dusk_siege.png"
+        },
+        "flashback": {
+          "prompt": "a soft hazy memory vision, dreamlike and unfocused, blurred warm light streaks and indistinct faraway silhouettes of an earthly city skyline, nostalgic muted desaturated tones, glowing bokeh",
+          "image": ""
+        },
+        "village_night": {
+          "prompt": "an ancient mountain village at night under spring rain, tiered dark wooden stilt houses with upturned eaves built along the hillside from the mid-slope down to the foot, warm yellow lantern light glowing from many windows forming a luminous ribbon of light across the mountain, fine spring rain, wooded ridges behind, bright even light with fully readable shadow detail",
+          "image": "assets/02_design/scenes/village_night.png"
+        },
+        "ancestral_hall": {
+          "prompt": "inside an ancient ancestral hall at night, brown-yellow wooden plank floor, rows of dark wooden ancestral tablets and a carved wooden shrine along the back wall, thick dark timber pillars and beams, a few candles and oil lamps casting warm amber light, a few thin incense sticks burning, bright even light with fully readable shadow detail, solemn quiet atmosphere",
+          "image": "assets/02_design/scenes/ancestral_hall.png"
+        },
+        "corridor": {
+          "prompt": "in a long wooden corridor of an ancient mountain clan compound at night, rows of matching orange-yellow paper lanterns hanging evenly from the eaves, weathered dark timber pillars and railings, clear night air with warm pools of lantern light, wet stone courtyard beyond, spring rain, bright even light with fully readable shadow detail",
+          "image": "assets/02_design/scenes/corridor.png"
+        },
+        "window_view": {
+          "prompt": "looking out through an upper wooden window toward an ancient mountain village at night, a wide vista of scattered warm window lights across the dark hillside, faint spring rain streaks in the air, neutral night tones with warm yellow accents, distant ridges, bright even light with fully readable shadow detail",
+          "image": "assets/02_design/scenes/window_view.png"
+        },
+        "fangyuan_room": {
+          "prompt": "inside a simple old wooden room at night, a plain wooden window with paper lattice, a small wooden desk holding a single oil lamp with a warm flickering flame, simple interior of weathered wood plank and clay plaster wall, spring rain outside the window, cool ambient interior lit by warm lamp glow, bright even light with fully readable shadow detail",
+          "image": "assets/02_design/scenes/fangyuan_room.png"
+        }
+      },
+      "comment_anchors": "[2026-10-06 新增构图锚] peak_dusk_siege = 与 peak_dusk 同一空间，但额外锁『人物站位构图』（方源背影居中于石台 + 群雄在远处围成松散大圈、中间留大片空地）。用途 = 方案C 里镜 2/11/20 的 I2V 首帧图，一举解决『围而不近』的距离语义 + 场景漂移。⚠️ 它含人物，不能给无主角的空镜当环境底（那是 peak_dusk 的活）。要在镜头生效需在分镜 anchor 字段写 peak_dusk_siege。 ｜ [2026-10-06 clean high-key 批次] 场2/3/4 的 5 张场景锚（ancestral_hall / corridor / fangyuan_room / village_night / window_view）全部重出，与场1 的 peak_dusk / peak_dusk_siege 同批同源（纯 T2I，禁用 i2i 保构图）。旧版归档 assets/_archive/scenes_before_cleanstyle2_20261006/；原始带水印图归档 assets/_archive/scenes_raw2_20261006/。锚串同步删掉 drifting mist / misty / dim / cave-like / desaturated / cold blue-grey 等『加雾压暗』词，并补 bright even light with fully readable shadow detail。",
+      "by_scene": {}
+    },
+    "comment_distance_lock": "群雄距离锁：重生前（场1）方源被正道群雄环伺，但原文写明「他们没有动手，都忌惮着方源的临死反扑」「方源慢慢转身，群雄顿时一阵骚动，齐齐后退一大步」—— 是包围，不是逼近：无人敢上前、更无肢体接触。分镜里「探身出圈/跨步向前/长杖刺出」这类位移会让模型拍成贴身叫骂，故在此按场次追加一条正向距离约束（H3 走 cfg=1，没有 negative 通道）。",
+    "distance_lock": {
+      "enabled": true,
+      "by_scene": {
+        "1": "the scattered host stands drawn up on one shared front facing him, keeping a wide, wary distance, standing well back with clear open ground between him and the nearest enemy, no one closes in, no one reaches out, no physical contact"
+      }
+    },
+    "comment_dialogue": "H3 原生对白：line 非空时把它转成 H3 的 <d>[语言] 台词</d> 语法连同说话人一起注入 prompt，由 H3 在生成视频时一并产出人声（无需 edge-tts）。启用后应把 tts.enabled 关掉，免得再叠一层。字幕仍由 line 单独烧入。",
+    "comment_speaker_ids": "说话人 → 稳定 ID（修「所有台词都标成同一个 S1」导致的多角色串音/串脸）。留空即自动：按分镜 speaker_key 首次出现顺序编号 S1,S2…；要钉死可填 {\"方源\":\"S1\",\"旁白\":\"S2\"}。",
+    "dialogue": {
+      "enabled": true,
+      "language": "Chinese",
+      "speaker_id_mode": "auto",
+      "speaker_ids": {
+        "方源": "S1",
+        "旁白": "S2",
+        "古月族长": "S3",
+        "方源少年": "S4",
+        "正道群雄甲": "S5",
+        "正道群雄乙": "S6",
+        "正道群雄丙": "S7",
+        "正道群雄丁": "S8",
+        "家老甲": "S9",
+        "家老乙": "S10",
+        "家老丙": "S11",
+        "家老丁": "S12",
+        "家老戊": "S13",
+        "家老己": "S14",
+        "家老庚": "S15",
+        "家老辛": "S16"
+      },
+      "default_speaker": "A character with a clear, distinctive voice",
+      "default_speech_mode": "on-screen",
+      "default_speech_verb": "shouts"
+    },
+    "megapixels": 0.4,
+    "duration_sec": 5,
+    "comment_style_prefix": "[2026-10-07 血案] 画风串只允许「正面描述」。H3 走 BasicGuider、无 negative 分支，no/without 类否定不会被减去，反而把那个词登记进条件 —— no bloom / no atmospheric haze / no vignette 这类带听觉含义的词会污染音频生成，实测把左右声道相关性从 0.99 打到 0.175（听感＝水泡音／回声）。禁用词：no bloom / no haze / no vignette / no color grading / no blown highlights / no crushed blacks。",
+    "comment_ref_order": "[三条铁律之三 · 2026-10-06] R2V 参考图的挂载顺序 = 场景图 → 道具图 → 人物定妆图。顺序决定 prompt 里 <Picture N> 的编号，改顺序必须重跑已生成的片段。scene_first=铁律顺序（默认，与行业惯例一致）；character_first=2026-10-06 之前的旧顺序（三视图在前），留作回退。",
+    "ref_order": "scene_first",
+    "comment_props": "[道具定妆图 · 预留层] assets/02_design/props/<道具>.png。行业惯例要求道具排在场景之后、人物之前。配置后自动插进参考图列表；分镜可用 props 字段（单个名或数组）按镜收窄。默认空 = 不启用。",
+    "props": [],
+    "props_by_scene": {},
+    "comment_appearance_with_refs": "[三条铁律之二「有图不写外观」· 2026-10-06] 挂了人物参考图的镜，外观该由图承担、文字不再复述。text=图文并用（当前默认，等同 2026-10-06 之前行为，安全）；skip=挂人物图即跳过服装/外貌串（铁律二目标态）。⚠️ 别直接切 skip —— 项目历史教训：绑定句未点名时参考图锁不住服装/长相，出过白袍事故与通用脸。先等绑定句确认生效（--dump-prompts 查 <Picture N> 职责、兜底计数为 0），再做单镜 A/B。",
+    "appearance_with_refs": "text",
+    "audio_filter": "volume=enable='lt(t\\,0.09)':volume=0,afade=t=in:st=0.09:d=0.02:curve=hsin,highpass=f=80,pan=stereo|c0=0.575*c0+0.425*c1|c1=0.425*c0+0.575*c1,loudnorm=I=-24:TP=-6:LRA=11",
+    "comment_audio_filter": "[2026-10-07 · D 方案] 逐片段应用的 ffmpeg 音频滤镜，依序做三件事：① highpass=f=80 滤直流与低频隆隆；② pan=stereo|c0=0.575*c0+0.425*c1|c1=0.425*c0+0.575*c1 —— **mid/side 压制**，把 Side=(L−R)/2 乘 0.15（系数 a=0.575 / b=0.425 由 (0.5±k/2) 推出，k=0.15），用于修 H3「左右声道各自生成」造成的立体声错乱（听感＝水泡音／人声回声／浑浊）；③ loudnorm=I=-24:TP=-6:LRA=11 —— **逐片段响度归一化**。实测（对损坏片段 h3_i2v_00096）：L/R 相关 0.421 → 0.981、Side/Mid −3.9 → −20.2 dB、LUFS −36.9 → −34.2；健康基准 00091 为 0.991 / −23.6 / −33.6，三项基本重合。⚠️ 增益刻意定在比健康基准低 0.6 dB（老板要求「不要太响」，背景音不喧宾夺主）；如需更响只调 volume 一项，+3→+4.5→+6 dB 对应 LUFS −35.7/−34.2/−32.7（健康线 −33.6，别超）。⛔ 勿用 loudnorm（把安静镜强行推响）。⛔ 勿用 afftdn 类 FFT 降噪 —— 频段门限逐帧跳变会产生 musical noise（听感正是水泡／咕噜声），还会切碎人声混响尾音（听感＝回音）。alimiter 的 limit 是线性值不是 dB（0.9 ≈ −0.9 dB），且必须带 level=false。注：本片 non_diegetic_music=N/A，没有独立 BGM 层，背景音来自 H3 的 overall_soundscape，故不存在配乐抢戏；side 压制会同时收敛环境声的过度空间感，人声更聚焦。空串=关闭。\n\n[2026-10-07 追加 · 为何改用逐片段 loudnorm] 原先用统一 volume=4.5dB 增益，实测各镜原始电平相差达 23 dB：空镜 镜1 raw 为 −24.6 dBFS / −36.9 LUFS（很轻），对白镜 镜2 raw 为 −1.63 dBFS / −14.8 LUFS（很响）。统一增益对轻镜不够、对响镜直接顶爆（镜2 段 Peak 冲到 −0.91 dB，削顶）。改为**逐片段** loudnorm 后两镜响度差从 23.3 dB 收敛到 0.4 dB，Max Peak 全部 ≤ −10 dB，削顶风险消除。⚠️ 注意区分：memory/skill 里\"禁用 loudnorm\"针对的是**全片单遍** loudnorm（会把安静镜整体推响）；**逐片段** loudnorm 是解决\"各镜音量不一致\"的正解。目标档可调：I=-20 / -22 / -24（越负越轻），TP 比 I 高约 18 dB，LRA=11。实测各档两镜 LUFS 差均仅 0.4 dB。",
+    "non_diegetic_music": "N/A",
+    "soundscape_default": "N/A",
+    "comment_audio_fields": "H3 官方提示词是三段式固定结构：integrated_multimodal_description / overall_soundscape / non_diegetic_music。overall_soundscape（1-4句）只放环境音、动作音效、非语言人声——对白不写这里；non_diegetic_music（1-3句）只放观众能听到的配乐，没有就写 N/A。⚠️ 缺这两个字段会让「安静镜头冒出没要求的人声/噪声」。",
+    "comment_turbo_switch": "[2026-10-09] turbo LoRA 开关。--turbo 4/8 = 挂 distil LoRA 跑 4/8 步（采样器/调度器 = euler + simple，提速约 3.8 倍）；--off = 回到官方非 turbo 档（20 步，质量最好，适合最终出片）。r2v 固定 8 步：ref2v 的 4 步 LoRA 只有 v0.1（544p 训练），而 8 步版是 v1.0 768p —— 更新 + 分辨率更高 ⇒ 效果更好，不随档位切换。备份：config.bak_before_turbo_20261009_151031.json"
+  },
+  "comment_tts": "人声改由 H3 原生生成（见 video.dialogue），故关闭 edge-tts，避免重复叠加；字幕仍由各镜 line 烧入。",
+  "tts": {
+    "enabled": false,
+    "provider": "edge",
+    "voice": "zh-CN-YunxiNeural",
+    "rate": "+0%",
+    "keep_ambient": true,
+    "voice_gain": 1.0,
+    "ambient_gain": 0.3
+  },
+  "output_dir": "output",
+  "subtitle_font": "C:/Windows/Fonts/msyh.ttc",
+  "paths": {
+    "comment": "资产分层目录（六环节流水线：01剧本 02定妆 03关键帧 04片段 05音频 06成片）。运行时状态仍留在 output_dir。",
+    "script": "assets/01_script",
+    "design": "assets/02_design",
+    "keyframes": "assets/03_keyframes",
+    "clips": "assets/04_clips",
+    "audio": "assets/05_audio",
+    "release": "assets/06_release"
+  }
+}

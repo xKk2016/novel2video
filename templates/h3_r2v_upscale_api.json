@@ -1,0 +1,319 @@
+{
+ "_comment": "MiniMax H3 Ref2VA (R2V) + Latent Upscaler 两阶段工作流。结构照搬官方 workflow_templates/minimax_h3_r2v_Latent Upscaler example workflow3.json：阶段1 在 0.2MP 低分辨率生成（token 少 -> 快），LTXVSeparateAVLatent 拆出视频 latent，MinimaxH3LatentUpscaler3D 放大到 1.0MP，LTXVConcatAVLatent 合回音频，阶段2 用 ManualSigmas 从 0.9035 refine 4 步，最后解码。需要插件 Comfyui_Minimax_h3_latent_Upscaler + models/latent_upscale_models/ 下的权重。",
+ "_comment_usage": "由 tools/make_r2v_upscale_template.py 生成，勿手改。",
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+   "type": "minimax"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "ref_images": {
+    "ref_image_0": [
+     "20",
+     0
+    ],
+    "ref_image_1": [
+     "21",
+     0
+    ]
+   },
+   "prompt": "AUTO_INJECT_PLACEHOLDER_PROMPT_FOR_MINIMAX_H3_REFERENCE_TO_VIDEO_NODE_PLEASE_REPLACE_THIS_LONG_STRING_AUTO_INJECT",
+   "width": [
+    "92",
+    0
+   ],
+   "height": [
+    "92",
+    1
+   ],
+   "length": 124,
+   "ref_image_size": "max"
+  }
+ },
+ "6": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 42
+  }
+ },
+ "7": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "90": {
+  "class_type": "LoraLoaderModelOnly",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "lora_name": "minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors",
+   "strength_model": 1.0
+  }
+ },
+ "91": {
+  "class_type": "MiniMaxH3SigmaShift",
+  "inputs": {
+   "model": [
+    "90",
+    0
+   ],
+   "shift_video": 12.0,
+   "shift_audio": 3.0
+  }
+ },
+ "92": {
+  "class_type": "ResolutionSelector",
+  "inputs": {
+   "aspect_ratio": "16:9 (Widescreen)",
+   "megapixels": 0.2,
+   "multiple": 32
+  }
+ },
+ "93": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "91",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 8,
+   "denoise": 1.0
+  }
+ },
+ "94": {
+  "class_type": "SplitSigmas",
+  "inputs": {
+   "sigmas": [
+    "93",
+    0
+   ],
+   "step": 4
+  }
+ },
+ "95": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "91",
+    0
+   ],
+   "conditioning": [
+    "5",
+    0
+   ]
+  }
+ },
+ "96": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "6",
+    0
+   ],
+   "guider": [
+    "95",
+    0
+   ],
+   "sampler": [
+    "7",
+    0
+   ],
+   "sigmas": [
+    "94",
+    0
+   ],
+   "latent_image": [
+    "5",
+    1
+   ]
+  }
+ },
+ "97": {
+  "class_type": "LTXVSeparateAVLatent",
+  "inputs": {
+   "av_latent": [
+    "96",
+    1
+   ]
+  }
+ },
+ "98": {
+  "class_type": "MinimaxH3LatentUpscaler3D",
+  "inputs": {
+   "latent": [
+    "97",
+    0
+   ],
+   "model_name": "minimax_h3_latent_upscaler_3d_conv_v1_fp16.safetensors",
+   "mode": "megapixels",
+   "mode.megapixels": 1.0,
+   "align": 32,
+   "enable_temporal_chunking": false,
+   "force_unload": true,
+   "device": "cuda",
+   "precision": "fp16"
+  }
+ },
+ "99": {
+  "class_type": "LTXVConcatAVLatent",
+  "inputs": {
+   "video_latent": [
+    "98",
+    0
+   ],
+   "audio_latent": [
+    "97",
+    1
+   ]
+  }
+ },
+ "100": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "91",
+    0
+   ],
+   "conditioning": [
+    "5",
+    0
+   ]
+  }
+ },
+ "101": {
+  "class_type": "ManualSigmas",
+  "inputs": {
+   "sigmas": "0.9035, 0.6316, 0.3158, 0.0000"
+  }
+ },
+ "102": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "6",
+    0
+   ],
+   "guider": [
+    "100",
+    0
+   ],
+   "sampler": [
+    "7",
+    0
+   ],
+   "sigmas": [
+    "101",
+    0
+   ],
+   "latent_image": [
+    "99",
+    0
+   ]
+  }
+ },
+ "11": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "102",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "102",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "11",
+    0
+   ],
+   "audio": [
+    "12",
+    0
+   ],
+   "fps": 24
+  }
+ },
+ "14": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "13",
+    0
+   ],
+   "filename_prefix": "novel2video/h3_r2v_ups",
+   "format": "mp4",
+   "codec": "h264",
+   "codec.encoding": "re-encode",
+   "codec.encoding.crf": 16
+  }
+ },
+ "20": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "fangyuan_youth_front.png"
+  }
+ },
+ "21": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "fangyuan_youth_face.png"
+  }
+ }
+}

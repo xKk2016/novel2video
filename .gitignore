@@ -1,0 +1,53 @@
+# ══════════════════════════════════════════════════════════
+#  novel2video —— 仓库只收录「源资产 / 分镜 / 配置 / 脚本」
+#  生成产物（片段、成片、关键帧、诊断图）一律不入库，
+#  它们靠 ComfyUI + 模型重新生成，体积大且不可 diff。
+# ══════════════════════════════════════════════════════════
+
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.whl
+
+# ── 生成产物（本次刻意排除）──────────────────────────────
+# 关键帧：靠 tools/build_keyframes.py + 关键帧提示词重出
+assets/03_keyframes/
+# 镜头片段 / 音频 / 成片 / 历史归档
+assets/04_clips/
+assets/05_audio/
+assets/06_release/
+assets/_archive/
+# 运行日志、诊断拼图、中间产物、校验输出
+output/
+
+# ── 调参前的备份快照 ─────────────────────────────────────
+# git 本身就是版本管理；这些是每次改配置前的手工拷贝。
+# 文件仍保留在本地磁盘，只是不入库。
+*.bak
+*.bak_*
+*.bak_before_*
+config.bak_before_*
+config.json.bak*
+storyboard_*.json.bak*
+
+# ── 环境快照 / 临时文件 ──────────────────────────────────
+# object_info.json = ComfyUI /object_info 导出，用 tools 现导即可
+object_info.json
+output/.runner.lock
+*.tmp
+*.lock
+*.stale
+_dump*.txt
+
+# ── 根目录一次性临时脚本（下划线前缀）────────────────────
+# 注意：仅根目录。tools/_*.py 是可复用诊断工具，必须保留。
+/_*.py
+
+# ── 编辑器 / 系统 ────────────────────────────────────────
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store

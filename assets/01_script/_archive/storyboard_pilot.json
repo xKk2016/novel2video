@@ -1,0 +1,134 @@
+[
+  {
+    "index": 1,
+    "scene_no": 1,
+    "shot_type": "transition",
+    "scene": "青茅山山巅，黄昏残阳如血，山风呼啸。远景俯瞰：一身残破碧绿大袍、披头散发、浑身浴血的方源独立于灰白山石之上，脚下石面被鲜血染成暗红，四周密密麻麻的正道群雄形成包围圈，晚霞绚烂如火。",
+    "first_frame_prompt": "Cinematic wide establishing shot of a lone battered man standing on a grey-white mountain rock at dusk, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, drenched in blood, surrounded by a dense ring of hostile martial artists in the distance, blood-red sunset sky, dramatic orange and crimson clouds, blood pooling on dark red stone, windswept grass, epic wuxia style, moody cinematic lighting",
+    "last_frame_prompt": "Cinematic wide establishing shot of the same lone battered man on the grey-white mountain rock at dusk, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, drenched in blood, the ring of hostile martial artists slightly closer, blood-red sunset sky, dramatic orange and crimson clouds, blood pooling on dark red stone, windswept grass, epic wuxia style, moody cinematic lighting",
+    "video_prompt": "Slow aerial push-in toward the lone bloody man on the rock, wind blowing his torn dark green robe and long black hair, hostile crowd slowly tightening the encirclement, dramatic dusk atmosphere, cinematic wuxia tone",
+    "line": "",
+    "duration": 4
+  },
+  {
+    "index": 2,
+    "scene_no": 1,
+    "shot_type": "detail",
+    "scene": "青茅山山巅，方源近景。他静如雕塑，苍白脸上映着晚霞，目光幽幽如古井深潭，身上数百道伤口涌血，脚下积成血泊。",
+    "first_frame_prompt": "Close-up of a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, standing still like a statue on a blood-soaked grey-white rock, hundreds of bleeding wounds, blood pooling at his feet, blood-red sunset glow on his pale face, eyes deep and calm like an ancient well, cinematic wuxia style, shallow depth of field",
+    "last_frame_prompt": "Close-up of the same young man with long straight black hair, pale sharp features, wearing a torn dark green robe, his eyes slowly lifting toward the distant green mountains, blood-red sunset glow on his pale face, hundreds of bleeding wounds, blood pooling at his feet, cinematic wuxia style, shallow depth of field",
+    "video_prompt": "Extremely slow push-in on the man's pale blood-streaked face, his deep calm eyes shifting slightly toward the distant mountains, blood dripping, embers and dust floating in the crimson dusk light, solemn atmosphere",
+    "line": "",
+    "duration": 4
+  },
+  {
+    "index": 3,
+    "scene_no": 1,
+    "shot_type": "dialogue",
+    "scene": "青茅山山巅，正道群雄甲从人群中探身怒吼，面目狰狞，身后群雄或咆哮或冷笑或警惕。",
+    "first_frame_prompt": "Medium shot of a furious martial artist in the hostile crowd pointing at the bloody lone man, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, standing on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic rim lighting",
+    "last_frame_prompt": "Medium shot of the furious martial artist in the hostile crowd still pointing and shouting, the bloody lone man with long straight black hair, pale sharp features, wearing a torn dark green robe, standing unmoved on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic rim lighting",
+    "video_prompt": "Handheld camera slight shake as the angry martial artist shouts and points, the crowd behind him stirring with rage, the lone bloody man remaining still, wind whipping robes, tense standoff",
+    "line": "方源，乖乖地交出春秋蝉，我给你个痛快！",
+    "duration": 4
+  },
+  {
+    "index": 4,
+    "scene_no": 1,
+    "shot_type": "dialogue",
+    "scene": "青茅山山巅，正道群雄乙上前一步，冷笑着高声威胁，周围群雄目光灼灼。",
+    "first_frame_prompt": "Medium close-up of a cold-smiling martial artist stepping forward, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, standing on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic side lighting",
+    "last_frame_prompt": "Medium close-up of the cold-smiling martial artist with his hand raised in threat, the bloody lone man with long straight black hair, pale sharp features, wearing a torn dark green robe, still standing on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic side lighting",
+    "video_prompt": "Slow dolly around the cold-smiling martial artist as he raises his hand, the crowd shifting restlessly, the lone bloody man motionless, blood-red dusk light, oppressive atmosphere",
+    "line": "方老魔，你不要妄图反抗了，今日我们正道各大派联合起来，就是要踏破你的魔窟。这里早已经布下天罗地网，这次你必定身首异处！",
+    "duration": 5
+  },
+  {
+    "index": 5,
+    "scene_no": 1,
+    "shot_type": "dialogue",
+    "scene": "青茅山山巅，正道群雄丙满脸悲愤，指着方源痛斥其滔天罪孽。",
+    "first_frame_prompt": "Medium close-up of an indignant martial artist pointing accusingly, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, standing on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic backlight",
+    "last_frame_prompt": "Medium close-up of the indignant martial artist with tears of rage in his eyes, the bloody lone man with long straight black hair, pale sharp features, wearing a torn dark green robe, still standing on the rock in the background, blood-red sunset, dense crowd of hostile fighters, cinematic wuxia style, dramatic backlight",
+    "video_prompt": "Slow push-in on the indignant martial artist as he trembles with rage and points, the crowd murmuring, the lone bloody man unmoved, blood-red dusk light, heavy tension",
+    "line": "方源你个该死的魔头，你为了练成春秋蝉，杀了千万人的性命。你已经犯下了滔天的罪孽，罪无可恕，罄竹难书！",
+    "duration": 5
+  },
+  {
+    "index": 6,
+    "scene_no": 1,
+    "shot_type": "dialogue",
+    "scene": "青茅山山巅，正道群雄丁双目赤红，咬牙切齿，仇恨欲狂地嘶吼。",
+    "first_frame_prompt": "Extreme close-up of a martial artist with bloodshot eyes and gritted teeth, veins bulging on his forehead, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, blurred on the rock in the background, blood-red sunset, cinematic wuxia style, harsh side light",
+    "last_frame_prompt": "Extreme close-up of the martial artist with a twisted hateful snarl, spit flying as he roars, the bloody lone man with long straight black hair, pale sharp features, wearing a torn dark green robe, blurred on the rock in the background, blood-red sunset, cinematic wuxia style, harsh side light",
+    "video_prompt": "Tight handheld close-up trembling as the vengeful martial artist roars with hatred, spit and sweat flying, the background crowd blurring, the lone bloody man a silent silhouette, blood-red dusk light, intense emotion",
+    "line": "魔头，三百年前你侮辱了我，夺走了我的清白之身，杀光我全家，诛了我的九族。从那刻起，我恨不得吃你肉，喝你的血！今天，我要让你生不如死！！",
+    "duration": 5
+  },
+  {
+    "index": 7,
+    "scene_no": 1,
+    "shot_type": "detail",
+    "scene": "青茅山山巅，方源静立，群雄齐齐后退一大步。他慢慢转身，望向青山落日，嘴角浮起一丝轻笑，神情平淡如古井。",
+    "first_frame_prompt": "Medium shot from behind the crowd as the bloody lone man slowly turns his back to them, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, the hostile crowd taking a collective step back, blood-red sunset over green mountains, cinematic wuxia style",
+    "last_frame_prompt": "Medium shot of the bloody lone man facing the distant green mountains and setting sun, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, a faint smile on his pale lips, the hostile crowd frozen behind him, blood-red sunset, cinematic wuxia style",
+    "video_prompt": "Slow pan following the bloody man as he turns away from the crowd toward the sunset, the crowd recoiling a step, wind stirring his long black hair and torn robe, blood dripping, melancholic yet defiant mood",
+    "line": "",
+    "duration": 4
+  },
+  {
+    "index": 8,
+    "scene_no": 1,
+    "shot_type": "dialogue",
+    "scene": "青茅山山巅，方源面朝青山落日，轻声吟诵，晚霞映照他苍白而平静的脸，添了一份嫣然。",
+    "first_frame_prompt": "Close-up profile of the bloody lone man facing the sunset, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, a serene faint smile, blood-red sunset glow on his face, green mountains in the distance, cinematic wuxia style, shallow depth of field",
+    "last_frame_prompt": "Close-up profile of the bloody lone man with eyes half-closed in quiet acceptance, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, blood-red sunset glow on his face, green mountains in the distance, cinematic wuxia style, shallow depth of field",
+    "video_prompt": "Very slow push-in on the man's serene profile as he murmurs softly, sunset light flickering on his pale face, his long black hair drifting in the wind, bittersweet and poetic atmosphere",
+    "line": "青山落日，秋月春风。当真是朝如青丝暮成雪，是非成败转头空。",
+    "duration": 5
+  },
+  {
+    "index": 9,
+    "scene_no": 1,
+    "shot_type": "detail",
+    "scene": "青茅山山巅，方源眼神一凛，低声呢喃，决绝之意浮现。他周身气息开始鼓荡，血泊微微震颤。",
+    "first_frame_prompt": "Close-up of the bloody lone man's eyes sharpening with resolve, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, blood-red sunset, the pool of blood at his feet trembling slightly, cinematic wuxia style, dramatic chiaroscuro",
+    "last_frame_prompt": "Close-up of the bloody lone man with a defiant cold smile, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, blood-red sunset, the pool of blood rippling, faint golden light beginning to glow around his body, cinematic wuxia style, dramatic chiaroscuro",
+    "video_prompt": "Tight push-in on the man's face as his expression turns defiant, faint golden energy flickering around him, the blood pool rippling, the crowd in the background starting to panic, ominous rising tension",
+    "line": "若是刚炼成的春秋蝉有效，来生还是要做邪魔！",
+    "duration": 4
+  },
+  {
+    "index": 10,
+    "scene_no": 1,
+    "shot_type": "action",
+    "scene": "青茅山山巅，群雄惊觉不妙，纷纷惊呼后退。方源悍然自爆，轰的一声，白光吞没画面。",
+    "first_frame_prompt": "Wide shot of the hostile crowd recoiling in terror, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, at the center of a blinding golden-white explosion, blood-red sunset, shockwave distorting the air, cinematic wuxia style, high contrast",
+    "last_frame_prompt": "Wide shot of a massive golden-white explosion consuming the mountain peak, the silhouettes of the crowd blown backward, a young man with long straight black hair, pale sharp features, wearing a torn dark green robe, vanishing in the blast, blood-red sunset overwhelmed by white light, cinematic wuxia style, high contrast",
+    "video_prompt": "Fast explosive camera shake as the man detonates, blinding white-gold light bursting outward, shockwave blasting the crowd back, debris and dust flying, the screen whiting out, sudden and devastating",
+    "line": "",
+    "duration": 3
+  },
+  {
+    "index": 11,
+    "scene_no": 2,
+    "shot_type": "transition",
+    "scene": "古月山寨宗族祠堂，深夜，春雨绵绵。祠堂内烛火通明，古月族长穿素白祭祀服跪在棕黄地板上，双手合十闭目祈祷，身后跪着十余名穿宽大白色祭服的家老。三层台案供奉先祖牌位，赤铜香炉香烟袅袅。",
+    "first_frame_prompt": "Cinematic wide interior shot of an ancestral hall at deep night, a middle-aged clan chief with graying temples in a solemn white ceremonial robe kneeling on a brown-yellow wooden floor, hands pressed together in prayer, eyes closed, behind him a dozen clan elders in loose white ceremonial robes kneeling, three-tier altar with ancestral tablets, bronze incense burner with curling smoke, warm candlelight, spring rain outside the windows, cinematic wuxia style",
+    "last_frame_prompt": "Cinematic wide interior shot of the same ancestral hall, the middle-aged clan chief with graying temples in a solemn white ceremonial robe bowing low with his forehead touching the floor, behind him the dozen clan elders in loose white ceremonial robes bowing in unison, three-tier altar with ancestral tablets, bronze incense burner with curling smoke, warm candlelight, spring rain outside, cinematic wuxia style",
+    "video_prompt": "Slow dolly forward into the ancestral hall as the clan chief and elders bow deeply in unison, incense smoke drifting, candle flames flickering, solemn and reverent atmosphere",
+    "line": "",
+    "duration": 4
+  },
+  {
+    "index": 12,
+    "scene_no": 2,
+    "shot_type": "dialogue",
+    "scene": "古月山寨宗族祠堂，祭祀完毕，众人起身。族长转身面向家老们，神色庄重地开口祈祷，家老们肃穆聆听。",
+    "first_frame_prompt": "Medium shot of the middle-aged clan chief with graying temples in a solemn white ceremonial robe standing and turning to face the clan elders, a dozen elders in loose white ceremonial robes rising behind him, three-tier altar with ancestral tablets and bronze incense burner in the background, warm candlelight, cinematic wuxia style",
+    "last_frame_prompt": "Medium close-up of the middle-aged clan chief with graying temples in a solemn white ceremonial robe speaking with a reverent expression, the clan elders in loose white ceremonial robes listening solemnly in the background, three-tier altar with ancestral tablets and bronze incense burner, warm candlelight, cinematic wuxia style",
+    "video_prompt": "Slow push-in on the clan chief as he speaks with clasped hands, the elders standing respectfully behind him, incense smoke curling, candlelight warm on their white robes, dignified and hopeful mood",
+    "line": "列祖列宗保佑，希望此次开窍大典中能多多涌现出资质优秀的少年，为家族增添新血和希望！",
+    "duration": 5
+  }
+]
